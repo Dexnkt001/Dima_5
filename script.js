@@ -1,4 +1,4 @@
-import * as BD from './DataBase.js';
+import {DataBase} from './DataBase.js'
 
 
 let arrGroup = [],
@@ -53,13 +53,22 @@ document.querySelector('ul').append(li)
   }
   count++;
 }
-
 function App(baseName, tableName){
-  this.db = new BD.DataBase(baseName);
+  this.db = new DataBase(baseName);
   this.tbl = tableName;
-  this.fields =
 }
 
+window.addEventListener('load', () => {
+  var data_base = new App('Data', 'Groups');
+})
+
+  const lol = (e) => {
+    Array.prototype.forEach.call(arrInputs, (element)=>{element.classList.remove('active_input');})
+    if(Array.prototype.includes.call(arrInputs, e.target)){
+    e.target.classList.add('active_input');
+  console.log(e.target)
+    }
+  }
 
 document.getElementById('button_1').addEventListener('click', UseAdd);
 document.querySelector('.menu').addEventListener('click', () => {
@@ -67,3 +76,4 @@ document.querySelector('.menu').addEventListener('click', () => {
 })
 document.getElementById('button_2').addEventListener('click',()=>{form.reset()});
 document.getElementById('button_3').addEventListener('click', Delete);
+document.querySelector('.inputs').addEventListener('click', lol);

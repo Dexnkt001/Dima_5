@@ -1,6 +1,5 @@
 export const templete = (n, result) =>{
   let table = document.createElement('table');
-  console.log(result);
   for (let i = 0; i < n; i++){
 let item = result.rows.item(i),
 row = document.createElement('tr');

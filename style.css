@@ -47,7 +47,7 @@ form div {
   justify-content: space-evenly;
 }
 
-input[type="text"],
+input,
 .menu {
   width: 100%;
   height: 25px;
@@ -59,9 +59,6 @@ input[type="text"],
   font-size: 22px;
 }
 
-input[type="text"]:active {
-  background-color: #183435;
-}
 .menu {
   display: flex;
   justify-content: space-between;
@@ -159,4 +156,8 @@ ul li:first-child {
 
 ul li:last-child {
   border-bottom: none;
+}
+
+.active_input {
+  background-color: #183435;
 }

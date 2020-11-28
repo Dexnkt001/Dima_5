@@ -2,13 +2,19 @@ import {templete} from './templete.js'
 
 export function DataBase(name){
   this.dbName = name;
-  this.db = openDatabase(this.name, '1','DATA',2000);
+  this.ucDbName = this.dbName = this.dbName[0].toUpperCase()+this.dbName.substring(1);
+  this.db = openDatabase(this.dbName, '1.0',this.ucDbName, 2000);
 };
 
 DataBase.prototype.create = function(name){
   let str = '';
   const areas = {
-    Grops:'TEXT'
+    id : 'INT',
+    number : 'INT',
+    kurs : 'INT',
+    fakult : 'TEXT',
+    countStud : 'INT',
+    email : 'TEXT'
   };
 for (let key in areas){
   str += `, ${key} ${areas[key]}`;
@@ -21,18 +27,17 @@ this.db.transsction(function(tx){
 };
 
 DataBase.prototype.add = function(name, objMass){
-let str ='';
 let keys = [];
 let values =[];
 
 
 const Data = {
-  id = 'INT',
-  number = 'INT',
-  kurs = 'INT',
-  fakult = 'TEXT',
-  countStud = 'INT',
-  email = 'TEXT'
+  id : 'INT',
+  number : 'INT',
+  kurs : 'INT',
+  fakult : 'TEXT',
+  countStud : 'INT',
+  email : 'TEXT'
 }
 
 for (let key in Data){
