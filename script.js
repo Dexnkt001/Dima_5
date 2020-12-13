@@ -33,21 +33,18 @@ function App(baseName, tableName){
   this.db = new DataBase(baseName);
   this.tbl = tableName;
 }
-console.log(data_base)
-
-window.addEventListener('load', () => {
-  data_base = new App('Data', 'Groups');
+window.onload = function(){
+  data_base = new App('DataGroups', 'Groups');
   data_base.db.create(data_base.tbl);
-  console.log(data_base)
-  console.log(121212)
-})
+  console.log('lololo', data_base);
+  console.log(data_base.db.db)
+}
 
-console.log(data_base)
 const UseAdd = () => {
 group = Add(count, Array.prototype.map.call(arrInputs, (element) => element.value))
 console.log(group)
 console.log(data_base)
-// data_base.db.add(data_base.tbl, group)
+data_base.db.add(data_base.tbl, group)
   if(count === 0){
   const list = document.createElement('ul');
 document.querySelector('.menu').insertAdjacentElement("afterEnd", list);
@@ -62,6 +59,9 @@ document.querySelector('ul').append(li)
   }
   count++;
 }
+
+let load = function (){console.log('wkegjwe');
+data_base.db.load(data_base.tbl);}
 
   const effect = (e) => {
     Array.prototype.forEach.call(arrInputs, (element)=>{element.classList.remove('active_input');})
@@ -78,6 +78,8 @@ document.querySelector('.menu').addEventListener('click', () => {
 document.getElementById('button_2').addEventListener('click',()=>{form.reset()});
 document.getElementById('button_3').addEventListener('click', Delete);
 document.querySelector('.inputs').addEventListener('click', effect);
+document.getElementById('button_3').addEventListener('click', Delete);
+document.getElementById('button_4').addEventListener('click', load);
 
 
 
