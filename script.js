@@ -2,9 +2,11 @@ import {DataBase} from './DataBase.js'
 
 
 let arrGroup = [],
-count = 0;
+count = 0,
+group;
 const arrInputs = document.querySelectorAll('input'),
 form = document.querySelector('form');
+var data_base;
 
 
 class Group{
@@ -17,18 +19,9 @@ class Group{
     this.email = args[4];
   }
 
-
-set AddInformation(args){
-[ this.number, this.kurs, this.fakult, this.countStud, this.email, this.id] = args;
 }
 
-get GetInformation(){
-  return [this.number, this.kurs, this.fakult, this.countStud, this.email, this.id]
-}
-
-}
-
-const Add = (Group, id, ...args) =>{
+const Add = (id, ...args) =>{
   return new Group(id, ...args);
 }
 
@@ -36,9 +29,25 @@ const Delete = (id) =>{
   arrGroup.splice(id,1);
 }
 
+function App(baseName, tableName){
+  this.db = new DataBase(baseName);
+  this.tbl = tableName;
+}
+console.log(data_base)
 
+window.addEventListener('load', () => {
+  data_base = new App('Data', 'Groups');
+  data_base.db.create(data_base.tbl);
+  console.log(data_base)
+  console.log(121212)
+})
+
+console.log(data_base)
 const UseAdd = () => {
-  arrGroup.push(Add(Group, count, Array.prototype.map.call(arrInputs, (element) => element.value)));
+group = Add(count, Array.prototype.map.call(arrInputs, (element) => element.value))
+console.log(group)
+console.log(data_base)
+// data_base.db.add(data_base.tbl, group)
   if(count === 0){
   const list = document.createElement('ul');
 document.querySelector('.menu').insertAdjacentElement("afterEnd", list);
@@ -53,16 +62,8 @@ document.querySelector('ul').append(li)
   }
   count++;
 }
-function App(baseName, tableName){
-  this.db = new DataBase(baseName);
-  this.tbl = tableName;
-}
 
-window.addEventListener('load', () => {
-  var data_base = new App('Data', 'Groups');
-})
-
-  const lol = (e) => {
+  const effect = (e) => {
     Array.prototype.forEach.call(arrInputs, (element)=>{element.classList.remove('active_input');})
     if(Array.prototype.includes.call(arrInputs, e.target)){
     e.target.classList.add('active_input');
@@ -76,4 +77,28 @@ document.querySelector('.menu').addEventListener('click', () => {
 })
 document.getElementById('button_2').addEventListener('click',()=>{form.reset()});
 document.getElementById('button_3').addEventListener('click', Delete);
-document.querySelector('.inputs').addEventListener('click', lol);
+document.querySelector('.inputs').addEventListener('click', effect);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// set AddInformation(args){
+// [ this.number, this.kurs, this.fakult, this.countStud, this.email, this.id] = args;
+// }
+
+// get GetInformation(){
+//   return [this.number, this.kurs, this.fakult, this.countStud, this.email, this.id]
+// }

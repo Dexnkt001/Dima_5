@@ -20,15 +20,18 @@ for (let key in areas){
   str += `, ${key} ${areas[key]}`;
 };
 
-this.db.transsction(function(tx){
+console.log(str)
+
+this.db.transaction(function(tx){
   tx.executeSql('create table if not exists' + name + '(id integer primary key autoincrement' + str + ')')
 });
 
 };
 
-DataBase.prototype.add = function(name, objMass){
-let keys = [];
-let values =[];
+DataBase.prototype.add = function(name, obj){
+let keys = [],
+values =[],
+objmass = [obj.id, obj.number, obj.kurs, obj.fakult, obj,countStud, obj.email]
 
 
 const Data = {
@@ -48,8 +51,10 @@ for(let key in Data){
   values.push(Data[key])
 }
 
+console.log(JSON.stringify(objmass))
+
 this.db.transsction(function(tx){
-tx.executeSql(`insert into ${name} (${keys.join(',')}) values (${JSON.stringify(objMass)})`)
+tx.executeSql(`insert into ${name} (${keys.join(',')}) values (${JSON.stringify(objmass)})`)
 }
 )
 };
